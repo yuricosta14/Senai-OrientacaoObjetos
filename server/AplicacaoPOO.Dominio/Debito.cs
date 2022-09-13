@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AplicacaoPOO.Dominio
 {
-    public internal class Debito
+    public class Debito
     {
         Pagamento Pagamento { get; set; }
         double Desconto { get; set; } 
