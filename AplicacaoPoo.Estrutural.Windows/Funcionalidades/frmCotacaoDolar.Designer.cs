@@ -101,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(492, 306);
+            this.ClientSize = new System.Drawing.Size(479, 306);
             this.Controls.Add(this.btnConverter);
             this.Controls.Add(this.txtDolarDia);
             this.Controls.Add(this.lblDolarDia);
@@ -111,6 +111,7 @@
             this.Controls.Add(this.lblBemVindo);
             this.Name = "frmCotacaoDolar";
             this.Text = "Cotação dolar";
+            this.Load += new System.EventHandler(this.frmCotacaoDolar_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
