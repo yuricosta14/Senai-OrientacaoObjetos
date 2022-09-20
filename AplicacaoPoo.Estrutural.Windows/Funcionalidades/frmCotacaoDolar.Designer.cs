@@ -69,6 +69,7 @@
             this.txtValorConversao.Name = "txtValorConversao";
             this.txtValorConversao.Size = new System.Drawing.Size(117, 23);
             this.txtValorConversao.TabIndex = 3;
+            this.txtValorConversao.TextChanged += new System.EventHandler(this.txtValorConversao_TextChanged);
             // 
             // lblDolarDia
             // 

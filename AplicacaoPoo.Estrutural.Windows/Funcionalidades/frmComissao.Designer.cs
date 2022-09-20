@@ -171,7 +171,6 @@
             this.Controls.Add(this.pictureHomem);
             this.Controls.Add(this.lblBoasVindas);
             this.Name = "frmComissao";
-            this.Text = "frmComissao";
             ((System.ComponentModel.ISupportInitialize)(this.pictureHomem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

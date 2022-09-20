@@ -18,12 +18,14 @@ namespace AplicacaoPoo.Estrutural.Windows.Funcionalidades
         {
             InitializeComponent();
             txtDolarDia.Text = "5,25";
+
+            btnConverter.Enabled = false;
         }
 
         private void btnConverter_Click(object sender, EventArgs e)
         {
-            var DolarDia = float.Parse(txtDolarDia.Text);
-            var DesejaConverter = float.Parse((string)txtValorConversao.Text);
+            var DolarDia = decimal.Parse(txtDolarDia.Text);
+            var DesejaConverter = decimal.Parse((string)txtValorConversao.Text);
 
             var resultado = DolarDia * DesejaConverter;
 
@@ -39,6 +41,21 @@ namespace AplicacaoPoo.Estrutural.Windows.Funcionalidades
         {
 
 
+        }
+
+        private void txtValorConversao_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var resultado = decimal.Parse(txtValorConversao.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("digite um valor númerico");
+                txtValorConversao.Focus();
+
+                throw;
+            }
         }
     }
 }

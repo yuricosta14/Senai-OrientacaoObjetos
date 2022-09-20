@@ -23,12 +23,9 @@ namespace AplicacaoPoo.Estrutural.Windows.Funcionalidades
             var Valor = float.Parse(txtPreço.Text);
             var resultado = VendasUnidade * Valor;
 
-            var Comissão = 
+            
 
-            string mensagem = resultado.ToString();
-            string titulo = "Valor Convertido";
-            MessageBox.Show($"Sua venda ficou: {resultado} Você recebeu de comissão: {}", titulo);
-
+            
 
         }
     }
