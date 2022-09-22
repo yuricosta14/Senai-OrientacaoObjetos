@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AplicacaoPOO.Dominio
+namespace AplicacaoPoo.Dominio
 {
     public class Credito
     {
@@ -16,6 +16,7 @@ namespace AplicacaoPOO.Dominio
         {
             var resultado = saldo + credito;
             return resultado;
+
         }
     }
 }
