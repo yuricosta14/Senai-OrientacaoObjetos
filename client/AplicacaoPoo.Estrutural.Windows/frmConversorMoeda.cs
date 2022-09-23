@@ -1,4 +1,5 @@
-﻿using AplicacaoPoo.Dominio.services;
+﻿using AplicacaoPoo.Dominio.helpers;
+using AplicacaoPoo.Dominio.services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,12 @@ namespace AplicacaoPoo.Estrutural.Windows
         public frmConversorMoeda()
         {
             InitializeComponent();
-            btnConverterEmReal.Enabled = false;
+            btnConverterEmReal.Enabled = true;
+
+            lblSegundoValor.Text = $"5,12 {MoedaHelper.Dolar}";
+            lblPrimeiroValor.Text = $"1 {MoedaHelper.Real} igual a";
+
+
         }
 
         private void btnConverterEmReal_Click(object sender, EventArgs e)
@@ -28,17 +34,16 @@ namespace AplicacaoPoo.Estrutural.Windows
             var moeda = new ConverterMoedaService();
             
             var resultado = moeda.ConverterDolarEmReal(valorEmDolar);
-            
-           
-            //string interpolation
-            MessageBox.Show($"Valor convertido é: {resultado} em dolares");
+
+            lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
+            lblPrimeiroValor.Text = $"{resultado} {MoedaHelper.Real} igual a";
+
+
         }
 
 
         private void txtValorEmDolar_TextChanged(object sender, EventArgs e)
         {
-
-
             try
             {
                 if (txtValorEmDolar.Text == "") 
@@ -57,8 +62,18 @@ namespace AplicacaoPoo.Estrutural.Windows
                 txtValorEmDolar.Focus();
                 btnConverterEmReal.Enabled = false;
             }
+
+            {
+                var valorEmDolar = decimal.Parse(txtValorEmDolar.Text);
+                var moeda = new ConverterMoedaService();
+
+                var resultado = moeda.ConverterDolarEmReal(valorEmDolar);
+
+                lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
+                lblPrimeiroValor.Text = $"{resultado} {MoedaHelper.Real} igual a";
+            }
         }
 
-       
+
     }
 }
