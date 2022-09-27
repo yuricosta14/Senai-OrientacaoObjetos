@@ -86,6 +86,7 @@
             // 
             // cboEscolherMoeda
             // 
+            this.cboEscolherMoeda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEscolherMoeda.FormattingEnabled = true;
             this.cboEscolherMoeda.Items.AddRange(new object[] {
             "Dolar Americano ",
@@ -93,8 +94,9 @@
             "Libra Esterlinas"});
             this.cboEscolherMoeda.Location = new System.Drawing.Point(222, 104);
             this.cboEscolherMoeda.Name = "cboEscolherMoeda";
-            this.cboEscolherMoeda.Size = new System.Drawing.Size(92, 23);
+            this.cboEscolherMoeda.Size = new System.Drawing.Size(116, 23);
             this.cboEscolherMoeda.TabIndex = 5;
+            this.cboEscolherMoeda.SelectedIndexChanged += new System.EventHandler(this.cboEscolherMoeda_SelectedIndexChanged);
             // 
             // frmConversorMoeda
             // 

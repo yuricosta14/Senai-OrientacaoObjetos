@@ -7,6 +7,7 @@ using System.Data;
 using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,6 +26,14 @@ namespace AplicacaoPoo.Estrutural.Windows
             lblSegundoValor.Text = $"5,12 {MoedaHelper.Dolar}";
             lblPrimeiroValor.Text = $"1 {MoedaHelper.Real} igual a";
 
+            var list = new List<string>();
+
+            list.Add(MoedaHelper.Dolar);
+            list.Add(MoedaHelper.Euro);
+            list.Add(MoedaHelper.Libras);
+            cboEscolherMoeda.DataSource = list;
+            cboEscolherMoeda.SelectedIndex = 0;
+
 
         }
 
@@ -37,8 +46,6 @@ namespace AplicacaoPoo.Estrutural.Windows
 
             lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
             lblPrimeiroValor.Text = $"{resultado} {MoedaHelper.Real} igual a";
-
-
         }
 
 
@@ -74,6 +81,52 @@ namespace AplicacaoPoo.Estrutural.Windows
             }
         }
 
+        private void cboEscolherMoeda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            #region logica da conversão de acordo com o valor selecionado
+            //atalho para comentar o código inteiro cntrl+k+c
+            //atalho para descomentar todo o codigo cntrl+k+u
+            //#region deixa o codigo mais organizado
+            if (txtValorEmDolar.Text == "") return;
 
+
+            var moedaService = new ConverterMoedaService();
+            var valorEmDolar = decimal.Parse(txtValorEmDolar.Text);
+
+            switch (cboEscolherMoeda.SelectedValue)
+            {
+                case MoedaHelper.Dolar:
+                    {
+                        var valorConvertido = moedaService.ConverterDolarEmReal(decimal.Parse(txtValorEmDolar.Text));
+                        lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
+                        lblPrimeiroValor.Text = $"{valorConvertido} {MoedaHelper.Real} igual a";
+
+                        break;
+                    }
+
+                case MoedaHelper.Euro:
+                    {
+                        var valorConvertido = moedaService.ConverterEuroEmReal(decimal.Parse(txtValorEmDolar.Text));
+                        lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
+                        lblPrimeiroValor.Text = $"{valorConvertido} {MoedaHelper.Real} igual a";
+                  
+                        break;
+                    }
+
+                case MoedaHelper.Libras:
+                    {
+                        var valorConvertido = moedaService.ConverterLibrasEmReal(decimal.Parse(txtValorEmDolar.Text));
+                        lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
+                        lblPrimeiroValor.Text = $"{valorConvertido} {MoedaHelper.Real} igual a";
+                        break;
+                       
+                    }
+                default:
+                    break;
+
+
+            }
+            #endregion
+        }
     }
 }
