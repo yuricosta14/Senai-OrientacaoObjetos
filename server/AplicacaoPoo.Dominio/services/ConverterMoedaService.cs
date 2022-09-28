@@ -9,7 +9,7 @@
     {
         decimal CotacaoDolar = 5.25m;
         decimal CotacaoLibra = 6.15m;
-        decimal CotacaoEuro = 6.0m;
+        decimal CotacaoEuro = 6.00m;
 
         public decimal ConverterDolarEmReal(decimal valor)
         {

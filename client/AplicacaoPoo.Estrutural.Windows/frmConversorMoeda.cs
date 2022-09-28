@@ -25,6 +25,7 @@ namespace AplicacaoPoo.Estrutural.Windows
 
             lblSegundoValor.Text = $"5,12 {MoedaHelper.Dolar}";
             lblPrimeiroValor.Text = $"1 {MoedaHelper.Real} igual a";
+            txtValorEmDolar.Text = "1";
 
             var list = new List<string>();
 
@@ -37,96 +38,87 @@ namespace AplicacaoPoo.Estrutural.Windows
 
         }
 
-        private void btnConverterEmReal_Click(object sender, EventArgs e)
+        private void txtValorEmDolar_TextChanged(object sender, EventArgs e)
         {
-            var valorEmDolar = decimal.Parse(txtValorEmDolar.Text);
-            var moeda = new ConverterMoedaService();
-            
-            var resultado = moeda.ConverterDolarEmReal(valorEmDolar);
+           
+            if (txtValorEmDolar.Text == "")
+            {
+                cboEscolherMoeda.Enabled = false;
+                return;
 
-            lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
-            lblPrimeiroValor.Text = $"{resultado} {MoedaHelper.Real} igual a";
+            }
+            cboEscolherMoeda.Enabled = true;
+
+            EfeturarConversaoMoeda();
+
+        }
+        private void cboEscolherMoeda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EfeturarConversaoMoeda();
         }
 
-
-        private void txtValorEmDolar_TextChanged(object sender, EventArgs e)
+        private void EfeturarConversaoMoeda()
         {
             try
             {
-                if (txtValorEmDolar.Text == "") 
+                #region logica da conversão de acordo com o valor selecionado
+                //atalho para comentar o código inteiro cntrl+k+c
+                //atalho para descomentar todo o codigo cntrl+k+u
+                //#region deixa o codigo mais organizado
+                if (txtValorEmDolar.Text == "") return;
+
+
+                var moedaService = new ConverterMoedaService();
+                var valorEmDolar = decimal.Parse(txtValorEmDolar.Text);
+
+                switch (cboEscolherMoeda.SelectedValue)
                 {
-                    btnConverterEmReal.Enabled = false;
-                    return;
-                };
+                    case MoedaHelper.Dolar:
+                        {
+                            var valorConvertido = moedaService.ConverterDolarEmReal(decimal.Parse(txtValorEmDolar.Text));
+                            lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
+                            lblPrimeiroValor.Text = $"{valorConvertido} {MoedaHelper.Real} igual a";
 
-                var resultado = decimal.Parse(txtValorEmDolar.Text);
-                btnConverterEmReal.Enabled = true;
+                            break;
+                        }
 
+                    case MoedaHelper.Euro:
+                        {
+                            var valorConvertido = moedaService.ConverterEuroEmReal(decimal.Parse(txtValorEmDolar.Text));
+                            lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Euro}";
+                            lblPrimeiroValor.Text = $"{valorConvertido} {MoedaHelper.Real} igual a";
+
+                            break;
+                        }
+
+                    case MoedaHelper.Libras:
+                        {
+                            var valorConvertido = moedaService.ConverterLibrasEmReal(decimal.Parse(txtValorEmDolar.Text));
+                            lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Libras}";
+                            lblPrimeiroValor.Text = $"{valorConvertido} {MoedaHelper.Real} igual a";
+                            break;
+
+                        }
+                    default:
+                        break;
+
+                        #endregion
+                }
             }
             catch (Exception)
             {
-                MessageBox.Show("A cotação do dalor é um valor decimal");
-                txtValorEmDolar.Focus();
-                btnConverterEmReal.Enabled = false;
+                MessageBox.Show("Você precisa informar o valor númerico");
+                    throw;
             }
 
-            {
-                var valorEmDolar = decimal.Parse(txtValorEmDolar.Text);
-                var moeda = new ConverterMoedaService();
-
-                var resultado = moeda.ConverterDolarEmReal(valorEmDolar);
-
-                lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
-                lblPrimeiroValor.Text = $"{resultado} {MoedaHelper.Real} igual a";
-            }
-        }
-
-        private void cboEscolherMoeda_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            #region logica da conversão de acordo com o valor selecionado
-            //atalho para comentar o código inteiro cntrl+k+c
-            //atalho para descomentar todo o codigo cntrl+k+u
-            //#region deixa o codigo mais organizado
-            if (txtValorEmDolar.Text == "") return;
-
-
-            var moedaService = new ConverterMoedaService();
-            var valorEmDolar = decimal.Parse(txtValorEmDolar.Text);
-
-            switch (cboEscolherMoeda.SelectedValue)
-            {
-                case MoedaHelper.Dolar:
-                    {
-                        var valorConvertido = moedaService.ConverterDolarEmReal(decimal.Parse(txtValorEmDolar.Text));
-                        lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
-                        lblPrimeiroValor.Text = $"{valorConvertido} {MoedaHelper.Real} igual a";
-
-                        break;
-                    }
-
-                case MoedaHelper.Euro:
-                    {
-                        var valorConvertido = moedaService.ConverterEuroEmReal(decimal.Parse(txtValorEmDolar.Text));
-                        lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
-                        lblPrimeiroValor.Text = $"{valorConvertido} {MoedaHelper.Real} igual a";
-                  
-                        break;
-                    }
-
-                case MoedaHelper.Libras:
-                    {
-                        var valorConvertido = moedaService.ConverterLibrasEmReal(decimal.Parse(txtValorEmDolar.Text));
-                        lblSegundoValor.Text = $"{valorEmDolar} {MoedaHelper.Dolar}";
-                        lblPrimeiroValor.Text = $"{valorConvertido} {MoedaHelper.Real} igual a";
-                        break;
-                       
-                    }
-                default:
-                    break;
 
 
             }
-            #endregion
-        }
+            
+
+                
+            }
+            
+            
     }
-}
+

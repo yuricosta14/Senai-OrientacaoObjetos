@@ -82,7 +82,6 @@
             this.btnConverterEmReal.Text = "Converter em Reais";
             this.btnConverterEmReal.UseVisualStyleBackColor = false;
             this.btnConverterEmReal.Visible = false;
-            this.btnConverterEmReal.Click += new System.EventHandler(this.btnConverterEmReal_Click);
             // 
             // cboEscolherMoeda
             // 
