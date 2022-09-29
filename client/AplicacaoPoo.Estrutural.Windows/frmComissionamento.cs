@@ -15,6 +15,13 @@ namespace AplicacaoPoo.Estrutural.Windows
         public frmComissionamento()
         {
             InitializeComponent();
+
+            pictureboxHomem.Focus()
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
