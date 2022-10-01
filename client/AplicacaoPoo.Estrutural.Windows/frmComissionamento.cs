@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AplicacaoPoo.Dominio.helpers;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,42 +19,23 @@ namespace AplicacaoPoo.Estrutural.Windows
             InitializeComponent();
 
             lblBemVindo.Select();
+
+            var produtoservice = new ProdutoService();
+            cboNomePecaVendida.DataSource = produtoservice.ListagemProdutosFake();
+            cboNomePecaVendida.DisplayMember = "Nome";
+
+            var funcionaservice = new FuncionarioService();
+            cboRegistroFuncionario.DataSource = funcionaservice.ListagemFuncionarioFake();
+            cboRegistroFuncionario.DisplayMember = "Id";
+
+           
+
+
+
+
         }
 
-        private void txtRespostaRegistroVendedor_TextChanged(object sender, EventArgs e)
-        {
-            if (txtRespostaRegistroVendedor.Text == "") return;
-            {
-                try
-                {
-                    var recebeNumero = decimal.Parse(txtRespostaRegistroVendedor.Text);
 
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Só e valido valores númericos para indetificação dos funcionarios");
-
-                }
-
-            }
-        }
-
-        private void txtCodigoPeca_TextChanged(object sender, EventArgs e)
-        {
-            if (txtCodigoPeca.Text == "") return;
-            {
-                try
-                {
-                    var recebeNumero2 = decimal.Parse(txtCodigoPeca.Text);
-
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Só e valido valores númericos para cadastro de peças");
-
-                }
-            }
-        }
 
         private void txtPrecoUnitario_TextChanged(object sender, EventArgs e)
         {
@@ -98,14 +81,13 @@ namespace AplicacaoPoo.Estrutural.Windows
             btnLimpar.Visible = true;
             lblNomeRegistro.Visible = true;
 
-
+            
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
-            txtRespostaRegistroVendedor.Text = ("");
-            txtNomePeça.Text = ("");
-            txtCodigoPeca.Text = ("");
+           
+            txtRegistroPeça.Text = ("");
             txtPrecoUnitario.Text = ("");
             txtQuantidadeVendida.Text = ("");
             lblNomeRegistro.Text = ("");
@@ -113,6 +95,17 @@ namespace AplicacaoPoo.Estrutural.Windows
             btnLimpar.Visible = false;
 
             
+        }
+
+        private void cboRegistroFuncionario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var funcionarioService = new ProdutoService();
+
+            var funcionarioFake = funcionarioService.listagem();
+            
+            var dado = funcionarioFake.Where(x => x.Id == combobox.SelectedValue).FirstOrDefault();
+
+
         }
     }
 }
