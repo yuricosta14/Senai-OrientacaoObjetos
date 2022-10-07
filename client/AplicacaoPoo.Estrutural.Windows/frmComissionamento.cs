@@ -101,9 +101,7 @@ namespace AplicacaoPoo.Estrutural.Windows
         {
             var funcionarioService = new ProdutoService();
 
-            var funcionarioFake = funcionarioService.listagem();
             
-            var dado = funcionarioFake.Where(x => x.Id == combobox.SelectedValue).FirstOrDefault();
 
 
         }
